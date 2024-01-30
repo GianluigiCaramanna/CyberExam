@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   postgres:
-    container_name: postgres_blog
+    container_name: postgres
     image: "postgres:13.2"
     env_file:
       - ./database.env
@@ -13,7 +13,7 @@ services:
     ports:
       - ":5432"
   pgadmin:
-    container_name: pgadmin_blog
+    container_name: pgadmin
     image: "dpage/pgadmin4:5.1"
     env_file:
       - ./database.env
