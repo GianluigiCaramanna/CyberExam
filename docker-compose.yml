@@ -22,7 +22,7 @@ services:
     networks:
       - backend
   keycloak:
-    container_name: CyberExamContainer
+    container_name: keycloakEsame
     image: "emilianonigro/cybersecexam:latest"
     depends_on:
       - "postgres"

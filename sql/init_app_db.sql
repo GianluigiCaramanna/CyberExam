@@ -1,4 +1,4 @@
-\c app;
+\c CyberExam;
 
 DROP TABLE IF EXISTS Member;
 
