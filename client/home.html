@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--<script src="./function.js" language="JavaScript" type="module" ></script>  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-image: url('sfondo.jpg');
+      height: 100vh; 
+      /* Inserisci il percorso dell'immagine di sfondo */
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 50%;
+      margin: 10px auto 30px;
+      background-color: rgba(255, 255, 255, 0.8);
+      /* Opacità dello sfondo */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .container2 {
+      display: none;
+      width: 50%;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      /* Opacità dello sfondo */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .option {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #0d4480;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .option:hover {
+      background-color: #0056b3;
+    }
+
+    /*input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-bottom: 10px;
+    } */
+  </style>
+</head>
+
+<body>
+
+  <!--<div class="container">
+  <h2>Scegli un'opzione e inserisci un numero:</h2>
+  <form>
+    <select name="opzione" id="opzioneSelect">
+        <option id="op0" value="opzione0">Assegna un gruppo ad un ruolo</option>
+        <option id="op1" value="opzione1">Crea un singolo utente</option>
+        <option id="op2" value="opzione2">Inserisci utenti</option>
+        <option id="op3" value="opzione3">Crea ruolo utente</option>
+        <option id="op4" value="opzione4">Crea n utenti casuali</option>
+        <option id="op5" value="opzione5">Crea gruppi e assegna utenti</option>
+        <option id="op6" value="opzione6">Cancella n utenti casuali</option>
+        <option id="op7" value="opzione7">Crea un nuovo client OAuth in Keycloak</option>
+        <option id="op8" value="opzione8">Crea n utenti casuali con gruppo</option>
+        <option id="op9" value="opzione9">Crea un ruolo</option>
+    </select>
+
+  </form>
+</div> -->
+  <div class="container">
+    <h1>Scegli un'opzione:</h1>
+    <div class="option" id="opzione1">Crea un nuovo client OAuth in Keycloak</div>
+    <div class="option" id="opzione2">Crea un singolo utente</div>
+    <div class="option" id="opzione3">Assegna un gruppo ad un ruolo</div>
+    <div class="option" id="opzione4">Crea ruolo utente</div>
+    <div class="option" id="opzione5">Crea n utenti casuali</div>
+    <div class="option" id="opzione6">Crea gruppi e assegna utenti</div>
+    <div class="option" id="opzione7">Cancella n utenti casuali</div>
+    <div class="option" id="opzione8">Crea n utenti casuali con gruppo</div>
+    <div class="option" id="opzione9">Crea un ruolo</div>
+  </div>
+
+
+  <div class="container2" id="result1">
+    <form id="form1">
+      <h2 style="text-align: center;">Inserisci nome del client:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput1" id="input1" type="text"/>
+        <!--<input name="resultInput1ddddd" id="input1" type="text"/> -->
+        <button type="submit">Invia</button>
+      </div>
+    </form>
+  </div>
+
+
+
+  <!--<div class="container2" id="result2"> -->
+
+  </div>
+
+  <div class="container2" id="result3">
+
+  </div>
+
+  <div class="container2" id="result4">
+
+  </div>
+
+  <div class="container2" id="result5">
+
+  </div>
+  <div class="container2" id="result6">
+
+  </div>
+  <div class="container2" id="result7">
+
+  </div>
+  <div class="container2" id="result8">
+
+  </div>
+  <div class="container2" id="result9">
+
+  </div>
+
+
+
+  <script type="module">
+    import {getAccessToken, CreateKeycloakClient, createOneUser} from "./function.js";
+    
+    const container2 = document.querySelectorAll(".container2")
+
+    if(localStorage.getItem("accessToken") == null) {
+      getAccessToken()
+    }
+    
+
+    document.getElementById("opzione1").addEventListener("click", () => {
+      //console.log(container2[0].style.display)
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      } 
+
+      document.getElementById("result1").style.display="block";
+    });
+
+    document.getElementById("form1").addEventListener("submit", (e) => {
+      e.preventDefault();
+      CreateKeycloakClient(e.target.resultInput1.value)
+    })
+
+
+    document.getElementById("opzione2").addEventListener("click", () => {
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      }
+      createOneUser()
+    })
+
+
+
+  </script>
+
+</body>
+
+</html>

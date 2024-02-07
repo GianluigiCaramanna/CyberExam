@@ -23,7 +23,7 @@ services:
       - backend
   keycloak:
     container_name: keycloakEsame
-    image: "emilianonigro/cybersecexam:latest"
+    image: "quay.io/keycloak/keycloak:latest"
     depends_on:
       - "postgres"
     env_file:
@@ -32,9 +32,9 @@ services:
       - "8080:8080"
     command: 
       - start-dev 
-      - --import-realm 
-    volumes:
-      - ./imports:/opt/keycloak/data
+      #- --import-realm 
+    #volumes:
+    #  - ./imports:/opt/keycloak/data
     networks:
       - backend
 
