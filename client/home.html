@@ -406,7 +406,9 @@
       var IdNewGroup = []
 
       getUser().then((response) => {
-        if(inputNumberUser < response.data.length) {
+        let numberDB = response.data.length -1
+
+        if(inputNumberUser <= numberDB) {
           createGroup(inputNameGroup).then(() => {
             getGroupId(inputNameGroup).then((res) => {
               IdNewGroup = res.data.filter( (user) => {
@@ -430,7 +432,7 @@
             alert("Nome gruppo già esistente, inserire un altro nome.")
           })        
         }else {
-          alert("Hai inserito un numero più alto (" + inputNumberUser + ") rispetto agli utenti presenti nel database (" + response.data.length + ")" )
+          alert("Hai inserito un numero più alto (" + inputNumberUser + ") rispetto agli utenti presenti nel database (" + numberDB + ")" )
         }
       })        
     })
