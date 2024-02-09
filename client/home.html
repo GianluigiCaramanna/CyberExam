@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--<script src="./function.js" language="JavaScript" type="module" ></script>  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 <html lang="it">
 
@@ -60,125 +59,370 @@
     .option:hover {
       background-color: #0056b3;
     }
-
-    /*input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      margin-bottom: 10px;
-    } */
   </style>
 </head>
 
 <body>
 
-  <!--<div class="container">
-  <h2>Scegli un'opzione e inserisci un numero:</h2>
-  <form>
-    <select name="opzione" id="opzioneSelect">
-        <option id="op0" value="opzione0">Assegna un gruppo ad un ruolo</option>
-        <option id="op1" value="opzione1">Crea un singolo utente</option>
-        <option id="op2" value="opzione2">Inserisci utenti</option>
-        <option id="op3" value="opzione3">Crea ruolo utente</option>
-        <option id="op4" value="opzione4">Crea n utenti casuali</option>
-        <option id="op5" value="opzione5">Crea gruppi e assegna utenti</option>
-        <option id="op6" value="opzione6">Cancella n utenti casuali</option>
-        <option id="op7" value="opzione7">Crea un nuovo client OAuth in Keycloak</option>
-        <option id="op8" value="opzione8">Crea n utenti casuali con gruppo</option>
-        <option id="op9" value="opzione9">Crea un ruolo</option>
-    </select>
-
-  </form>
-</div> -->
   <div class="container">
     <h1>Scegli un'opzione:</h1>
     <div class="option" id="opzione1">Crea un nuovo client OAuth in Keycloak</div>
     <div class="option" id="opzione2">Crea un singolo utente</div>
     <div class="option" id="opzione3">Assegna un gruppo ad un ruolo</div>
-    <div class="option" id="opzione4">Crea ruolo utente</div>
+    <div class="option" id="opzione4">Crea ruolo</div>
     <div class="option" id="opzione5">Crea n utenti casuali</div>
-    <div class="option" id="opzione6">Crea gruppi e assegna utenti</div>
+    <div class="option" id="opzione6">Crea gruppo e assegna utenti</div>
     <div class="option" id="opzione7">Cancella n utenti casuali</div>
     <div class="option" id="opzione8">Crea n utenti casuali con gruppo</div>
-    <div class="option" id="opzione9">Crea un ruolo</div>
+    <div class="option" id="opzione9">Verifica il numero utenti presenti nel database</div>
+    
   </div>
 
-
+  <!--Crea un nuovo client OAuth in Keycloak-->
   <div class="container2" id="result1">
     <form id="form1">
       <h2 style="text-align: center;">Inserisci nome del client:</h2>
       <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
         <input name="resultInput1" id="input1" type="text"/>
-        <!--<input name="resultInput1ddddd" id="input1" type="text"/> -->
         <button type="submit">Invia</button>
       </div>
     </form>
   </div>
 
 
+  <!-- crea singolo utente -->
+  <!--<div class="container2" id="result2"> </div> -->
 
-  <!--<div class="container2" id="result2"> -->
 
-  </div>
-
+  
+ 
+  <!--Assegna un gruppo ad un ruolo-->
   <div class="container2" id="result3">
-
+    <form id="form3">
+      <h2 style="text-align: center;">Inserisci nome del gruppo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput3" id="input3" type="text"/>
+      </div>
+      <h2 style="text-align: center;">Inserisci nome del ruolo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput3w1" id="input3.1" type="text"/> 
+        <button type="submit">Invia</button>
+      </div>
+    </form>
   </div>
 
+
+  <!-- Crea ruolo -->
   <div class="container2" id="result4">
-
+    <form id="form4">
+      <h2 style="text-align: center;">Inserisci nome del ruolo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput4" id="input4" type="text"/>
+        <button type="submit">Invia</button>
+      </div>
+    </form>
   </div>
 
+
+  <!--Crea n utenti casuali-->
   <div class="container2" id="result5">
-
+    <form id="form5">
+      <h2 style="text-align: center;">Inserisci numero di utenti da creare:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput5" id="input5" type="number" min="1" max="20"/>
+        <button type="submit">Invia</button>
+      </div>
+    </form>
   </div>
+
+
+  <!--Crea gruppo e assegna utenti-->
   <div class="container2" id="result6">
-
+    <form id="form6">
+      <h2 style="text-align: center;">Inserisci nome del gruppo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput6" id="input6" type="text" required/>
+      </div>
+      <h2 style="text-align: center;">Inserisci numeri di utenti da inserire nel gruppo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput6w1" id="input6.1" type="number" min="1", max="20" required/> 
+        <button type="submit">Invia</button>
+      </div>
+    </form>
   </div>
+
+
+  <!--Cancella n utenti casuali-->
   <div class="container2" id="result7">
+    <form id="form7">
+      <h2 style="text-align: center;">Inserisci numero utenti da eliminare:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput7" id="input7" type="number" min="1" max="20"/>
+        <button type="submit">Invia</button>
+      </div>
+    </form>
+
 
   </div>
+
+
+
+
   <div class="container2" id="result8">
 
   </div>
-  <div class="container2" id="result9">
 
-  </div>
+  <!--Verifica il numero utenti presenti nel database-->
+  <!--<div class="container2" id="result9> </div> -->
 
 
 
-  <script type="module">
-    import {getAccessToken, CreateKeycloakClient, createOneUser} from "./function.js";
+  <script type="module" >
+    import {CreateKeycloakClient, createOneUser,createRole, getGroupId, getRoleId, assignGroupsToRole,deleteUser,getUser,createGroup,putUserToGroup} from "./function.js";
     
     const container2 = document.querySelectorAll(".container2")
-
-    if(localStorage.getItem("accessToken") == null) {
-      getAccessToken()
-    }
+  
     
-
+    // Crea un nuovo client OAuth in Keycloak 
     document.getElementById("opzione1").addEventListener("click", () => {
-      //console.log(container2[0].style.display)
+
       for (let i = 0; i < container2.length; i++) {
         container2[i].style.display = "none";
       } 
-
+      
       document.getElementById("result1").style.display="block";
     });
 
     document.getElementById("form1").addEventListener("submit", (e) => {
       e.preventDefault();
-      CreateKeycloakClient(e.target.resultInput1.value)
+
+      CreateKeycloakClient(e.target.resultInput1.value).then((result) => {
+        alert("Client creato con successo!")
+      })
+      document.getElementById("result1").style.display="none";
+      document.getElementById("input1").value = '';
     })
 
 
+
+    //Crea singolo utente
     document.getElementById("opzione2").addEventListener("click", () => {
       for (let i = 0; i < container2.length; i++) {
         container2[i].style.display = "none";
       }
-      createOneUser()
+      createOneUser().then((result) => {
+        alert("Utente creato con successo!")
+      })
+    })
+
+  
+    //Assegna un gruppo ad un ruolo
+    document.getElementById("opzione3").addEventListener("click", () => {
+
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      } 
+
+    document.getElementById("result3").style.display="block";
+    });
+
+
+    document.getElementById("form3").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      var groupName = e.target.resultInput3.value; 
+      var roleName = e.target.resultInput3w1.value;
+      var flag = false; 
+      var GroupID
+
+
+      getGroupId(groupName).then((result) => {
+        for(let i=0; i<result.data.length; i++) {
+          if(result.data[i].name == groupName ) {
+            GroupID = result.data[i].id;
+            flag = true; 
+          }
+        }
+        if(!flag) {
+          alert("Nessun gruppo trovato, prego di creare un gruppo!")
+        }else {
+          var RoleID
+          getRoleId(roleName).then((res) => {
+            RoleID = res.data.id; 
+            assignGroupsToRole(GroupID, RoleID, roleName).then((risp) => {
+              alert("Ruolo " + roleName + " aggiungo correttamente al gruppo " + groupName)
+              document.getElementById("result3").style.display="none";
+              document.getElementById("input3").value = '';
+              document.getElementById("input3.1").value = '';
+            })
+          }).catch((error) => {
+            alert("Attenzione, il ruolo " + roleName + " non esiste")
+          })
+        } 
+      })
+    })
+
+
+    //Crea ruolo 
+    document.getElementById("opzione4").addEventListener("click", () => {
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      } 
+      document.getElementById("result4").style.display="block";
+    });
+
+    document.getElementById("form4").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let inputUser = e.target.resultInput4.value;
+
+      createRole(e.target.resultInput4.value).then((result) => {
+
+
+
+        alert("Ruolo " + inputUser +  " è stato creato con successo!")
+      }) 
+      document.getElementById("result4").style.display="none";
+      document.getElementById("input4").value = ''; 
+    })
+
+
+
+    //crea n utenti casuali 
+    document.getElementById("opzione5").addEventListener("click", () => {
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      } 
+      document.getElementById("result5").style.display="block";
+    });
+
+    document.getElementById("form5").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+     
+
+      let inputUserNumber = e.target.resultInput5.value;
+      let count = 0; 
+
+      if(inputUserNumber == 0) {
+        alert("Inserire un valore maggiore di 0!")
+      }else {
+
+        for(let i=0; i<inputUserNumber; i++){
+            createOneUser()        
+          count++;
+        }
+        if(count == inputUserNumber) {
+              alert("Utenti creati con successo")
+        }  
+          
+        document.getElementById("result5").style.display="none";
+        document.getElementById("input5").value = ''; 
+      }
+    })
+
+
+    //Elimina Utenti casuali
+    document.getElementById("opzione7").addEventListener("click", () => {
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      }
+      document.getElementById("result7").style.display="block";
+    });
+
+
+    document.getElementById("form7").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if(e.target.resultInput7.value == 0) {
+        alert("Inserire un valore maggiore di 0!")
+      }else {
+
+        getUser().then((result) => {
+
+          let listUserId = result.data.filter( (user) => {
+            return user.username != "admin";
+          })
+
+          let countVolte = 0
+
+          if(e.target.resultInput7.value > listUserId.length) {
+            alert("Il numero di utenti da eliminare (" + e.target.resultInput7.value + ")" + " è maggiore del numero di utenti nel database (" + listUserId.length + ")")
+          }else {
+
+            for (let i= 0; i < e.target.resultInput7.value; i++) {
+              deleteUser(listUserId[i].id).then(
+                countVolte ++
+              );
+            }
+
+            if(countVolte == e.target.resultInput7.value) {
+              alert("Utenti eliminati con successo!")
+              document.getElementById("result7").style.display="none";
+              document.getElementById("input7").value = '';
+            }   
+          }
+        })
+        
+      }
+    })
+
+    //Verifica il numero utenti presenti nel database
+    document.getElementById("opzione9").addEventListener("click", () => {
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      }
+      getUser().then((result) => {
+        alert("Utenti presenti nel database: " + result.data.length)
+      })
+    })
+
+
+    //Crea gruppo e assegna utenti
+    document.getElementById("opzione6").addEventListener("click", () => {
+      for (let i = 0; i < container2.length; i++) {
+        container2[i].style.display = "none";
+      }
+      document.getElementById("result6").style.display="block";
+    });
+
+    document.getElementById("form6").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let inputNameGroup = e.target.resultInput6.value;
+      let inputNumberUser = e.target.resultInput6w1.value;
+
+      let idUser = []
+      var IdNewGroup = []
+
+      getUser().then((response) => {
+        if(inputNumberUser < response.data.length) {
+          createGroup(inputNameGroup).then(() => {
+            getGroupId(inputNameGroup).then((res) => {
+              IdNewGroup = res.data.filter( (user) => {
+                return user.name == inputNameGroup;
+              })     
+
+              for(let i=0; i<inputNumberUser; i++) {
+                idUser.push(response.data[i])
+              }
+
+              for(let i=0; i<idUser.length; i++) {
+                putUserToGroup(IdNewGroup[0].id, idUser[i].id).then((ris) => {
+                })
+              }
+              alert("Gruppo creato e utenti inseriti!")
+              document.getElementById("result6").style.display="none";
+              document.getElementById("input6").value = ''; 
+              document.getElementById("input6.1").value = '';
+            })
+          }).catch((err) => {
+            alert("Nome gruppo già esistente, inserire un altro nome.")
+          })        
+        }else {
+          alert("Hai inserito un numero più alto (" + inputNumberUser + ") rispetto agli utenti presenti nel database (" + response.data.length + ")" )
+        }
+      })        
     })
 
 
