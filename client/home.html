@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
 <html lang="it">
 
 <head>
@@ -68,17 +69,16 @@
     <h1>Scegli un'opzione:</h1>
     <div class="option" id="opzione1">Crea un nuovo client OAuth in Keycloak</div>
     <div class="option" id="opzione2">Crea un singolo utente</div>
-    <div class="option" id="opzione3">Assegna un gruppo ad un ruolo</div>
+    <div class="option" id="opzione3">Assegna un ruolo ad un gruppo</div>
     <div class="option" id="opzione4">Crea ruolo</div>
     <div class="option" id="opzione5">Crea n utenti casuali</div>
     <div class="option" id="opzione6">Crea gruppo e assegna utenti</div>
     <div class="option" id="opzione7">Cancella n utenti casuali</div>
-    <div class="option" id="opzione8">Crea n utenti casuali con gruppo</div>
-    <div class="option" id="opzione9">Verifica il numero utenti presenti nel database</div>
+    <div class="option" id="opzione8">Verifica il numero utenti presenti nel database</div>
     
   </div>
-
-  <!--Crea un nuovo client OAuth in Keycloak-->
+  <!--  OPZIONE 1  -->
+  <!--Crea un nuovo client OAuth in Keycloak--> 
   <div class="container2" id="result1">
     <form id="form1">
       <h2 style="text-align: center;">Inserisci nome del client:</h2>
@@ -88,14 +88,8 @@
       </div>
     </form>
   </div>
-
-
-  <!-- crea singolo utente -->
-  <!--<div class="container2" id="result2"> </div> -->
-
-
-  
  
+  <!--  OPZIONE 3  -->
   <!--Assegna un gruppo ad un ruolo-->
   <div class="container2" id="result3">
     <form id="form3">
@@ -111,7 +105,7 @@
     </form>
   </div>
 
-
+  <!--  OPZIONE 4  -->
   <!-- Crea ruolo -->
   <div class="container2" id="result4">
     <form id="form4">
@@ -123,7 +117,7 @@
     </form>
   </div>
 
-
+  <!--  OPZIONE 5  -->
   <!--Crea n utenti casuali-->
   <div class="container2" id="result5">
     <form id="form5">
@@ -135,7 +129,7 @@
     </form>
   </div>
 
-
+  <!--  OPZIONE 6  -->
   <!--Crea gruppo e assegna utenti-->
   <div class="container2" id="result6">
     <form id="form6">
@@ -151,7 +145,7 @@
     </form>
   </div>
 
-
+  <!--  OPZIONE 7  -->
   <!--Cancella n utenti casuali-->
   <div class="container2" id="result7">
     <form id="form7">
@@ -167,13 +161,23 @@
 
 
 
-
+  <!--  OPZIONE 8  -->
   <div class="container2" id="result8">
+    <form id="form8">
+      <h2 style="text-align: center;">Inserisci nome del gruppo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput8" id="input8" type="text" required/>
+      </div>
+      <h2 style="text-align: center;">Inserisci numeri di utenti da inserire nel gruppo:</h2>
+      <div style="text-align: center; display: flex; flex-direction: column; gap: 15px;">
+        <input name="resultInput8w1" id="input8.1" type="number" min="1", max="20" required/> 
+        <button type="submit">Invia</button>
+      </div>
+    </form>
+
+
 
   </div>
-
-  <!--Verifica il numero utenti presenti nel database-->
-  <!--<div class="container2" id="result9> </div> -->
 
 
 
@@ -183,6 +187,8 @@
     const container2 = document.querySelectorAll(".container2")
   
     
+
+
     // Crea un nuovo client OAuth in Keycloak 
     document.getElementById("opzione1").addEventListener("click", () => {
 
@@ -210,7 +216,12 @@
       for (let i = 0; i < container2.length; i++) {
         container2[i].style.display = "none";
       }
-      createOneUser().then((result) => {
+      faker.locale = "en";
+      let fakeFirstName = faker.name.firstName();
+      let fakeLastName = faker.name.lastName();
+      let fakeEmail = faker.internet.email(fakeFirstName, fakeLastName);
+
+      createOneUser(fakeFirstName,fakeLastName,fakeEmail).then((result) => {
         alert("Utente creato con successo!")
       })
     })
@@ -273,13 +284,8 @@
 
     document.getElementById("form4").addEventListener("submit", (e) => {
       e.preventDefault();
-
       let inputUser = e.target.resultInput4.value;
-
       createRole(e.target.resultInput4.value).then((result) => {
-
-
-
         alert("Ruolo " + inputUser +  " è stato creato con successo!")
       }) 
       document.getElementById("result4").style.display="none";
@@ -299,8 +305,6 @@
     document.getElementById("form5").addEventListener("submit", (e) => {
       e.preventDefault();
 
-     
-
       let inputUserNumber = e.target.resultInput5.value;
       let count = 0; 
 
@@ -308,12 +312,17 @@
         alert("Inserire un valore maggiore di 0!")
       }else {
 
+
         for(let i=0; i<inputUserNumber; i++){
-            createOneUser()        
+          faker.locale = "en";
+          let fakeFirstName = faker.name.firstName();
+          let fakeLastName = faker.name.lastName();
+          let fakeEmail = faker.internet.email(fakeFirstName, fakeLastName);
+          createOneUser(fakeFirstName,fakeLastName,fakeEmail)        
           count++;
         }
         if(count == inputUserNumber) {
-              alert("Utenti creati con successo")
+          alert("Utenti creati con successo")
         }  
           
         document.getElementById("result5").style.display="none";
@@ -368,12 +377,13 @@
     })
 
     //Verifica il numero utenti presenti nel database
-    document.getElementById("opzione9").addEventListener("click", () => {
+    document.getElementById("opzione8").addEventListener("click", () => {
       for (let i = 0; i < container2.length; i++) {
         container2[i].style.display = "none";
       }
       getUser().then((result) => {
-        alert("Utenti presenti nel database: " + result.data.length)
+        let number = result.data.length -1 //non conto l'admin
+        alert("Utenti presenti nel database: " + number)
       })
     })
 
@@ -425,8 +435,7 @@
       })        
     })
 
-
-
+    
   </script>
 
 </body>

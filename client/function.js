@@ -135,31 +135,20 @@ export async function CreateKeycloakClient(input) {
 
 }
 
-export async function createOneUser() {
+export async function createOneUser(nome,cognome,email) {
 
     const token = localStorage.getItem("accessToken")
 
-    const number = Math.floor(Math.random() * 100) + 1
-
-    let user = "Test" + number;
-    let email = 
-            [   'gmail.com', 'libero.it', 'outlook.com', 'virgilio.it', 'hotmail.it', 'msn.com',
-                'tiscali.it', 'alice.it', 'email.it', 'icloud.com', 'yahoo.it', 'sky.com',
-                'poste.it', 'tim.it', 'me.com', 'aol.com', 'mail.com', 'proton.me', 
-                'inbox.com', 'hotmail.com', 'live.it', 'yahoo.com', 'bol.com.br',
-                'fastwebnet.it', 'tin.it', 'aruba.it', 'pec.it', 'teletu.it', 'mac.com'
-            ]
-
     let data = {
         "createdTimestamp": Date.now(),
-        "username": user,
+        "username": nome + cognome,
         "enabled": true,
         "credentials": [{"type": "password", "value": "test", "temporary": "False"}],
         "totp": false,
         "emailVerified": true,
-        "firstName": user,
-        "lastName": user,
-        "email": user + "@" + email[(Math.floor(Math.random() * email.length) + 1)],
+        "firstName": nome,
+        "lastName": cognome,
+        "email": email,
         "disableableCredentialTypes": [],
         "requiredActions": [],
         "notBefore": 0,
@@ -172,7 +161,6 @@ export async function createOneUser() {
         },
         "realmRoles": [	"mb-user" ]
     }
-
 
     let promise = new Promise((resolve,reject) => {
 
@@ -192,7 +180,7 @@ export async function createOneUser() {
                 if(err.response.status == 401) {
                     getAccessToken().then(data => {
                         if(data.status == 200) {
-                            createOneUser()
+                            createOneUser(nome,cognome,email)
                             resolve()
                         }else {
                             reject(err)
