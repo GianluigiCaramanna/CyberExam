@@ -24,7 +24,6 @@ export async function getAccessToken() {
             data: data 
         }).then(res => {
             localStorage.setItem("accessToken", res.data.access_token)
-            localStorage.setItem("Expire-in", res.data.expires_in)
             resolve({"status": res.status})
         }).catch(err=> {
             console.log("errore nel token: ", err)
